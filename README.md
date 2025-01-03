@@ -16,7 +16,7 @@ Este repositório contém o código-fonte do meu portfólio pessoal, desenvolvid
 - Links para redes sociais e meios de contato.
 - Design responsivo para dispositivos móveis e desktops.
 
-## Como Rodar o Projeto
+## Como Rodar o Projeto (Localmente por enquanto quando finalizado eu farei o Deploy)
 
 1. Clone o repositório:
    ```bash

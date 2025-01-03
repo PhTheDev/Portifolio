@@ -7,9 +7,6 @@ import Footer from "./components/footer/Footer";
 import Projects from "./components/projects/Projects";
 import Skills from "./components/skills/Skills";
 
-
-
-
 export default function Home() {
   return (
     <div>

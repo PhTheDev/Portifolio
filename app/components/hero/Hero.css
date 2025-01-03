@@ -1,176 +1,41 @@
-/* Estilo do fundo e estrutura do Hero */
-.hero-section {
-    background: linear-gradient(to right, #3c3c6e, #1a1a3d); /* Gradiente interessante */
-    color: white;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-    position: relative;
-    overflow: hidden;
+/* Hero.css */
+@keyframes pulseBorder {
+  0% {
+    transform: rotate(0deg);
+    box-shadow: 0 0 15px 0 rgba(88, 166, 255, 0.7), 0 0 30px 0 rgba(88, 166, 255, 0.5);
   }
-  
-  .hero-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    width: 100%;
-    z-index: 1;
+  50% {
+    transform: rotate(180deg);
+    box-shadow: 0 0 25px 0 rgba(88, 166, 255, 1), 0 0 40px 0 rgba(88, 166, 255, 0.7);
   }
-  
-  .hero-text {
-    text-align: left;
-    max-width: 600px;
+  100% {
+    transform: rotate(360deg);
+    box-shadow: 0 0 15px 0 rgba(88, 166, 255, 0.7), 0 0 30px 0 rgba(88, 166, 255, 0.5);
   }
-  
-  .hero-title {
-    font-size: 3rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
-    animation: fadeInUp 1s ease-out forwards;
-  }
-  
-  .highlight {
-    color: #58a6ff;
-    text-decoration: underline;
-  }
-  
-  .hero-description {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    opacity: 0.8;
-    animation: fadeInUp 1.5s ease-out forwards;
-  }
-  
-  .cta-button {
-    display: inline-block;
-    background-color: #58a6ff;
-    color: white;
-    font-weight: 600;
-    padding: 12px 36px;
-    border-radius: 50px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .cta-button:hover {
-    background-color: #3d88d1;
-    transform: translateY(-2px);
-  }
-  
-  .cta-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.5);
-  }
-  
-  /* Foto */
-  .hero-image-container {
-    position: relative;
-    width: 100%;
-    max-width: 500px; /* Ajuste o tamanho máximo da imagem */
-    height: auto;
-    overflow: visible; /* Permite que a imagem seja expandida */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 30px; /* Aumenta o espaçamento lateral */
-  }
-  
-  .hero-image-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at top left, rgba(88, 166, 255, 0.4), rgba(56, 53, 102, 0.6));
-    border-radius: 50%;
-    z-index: -1; /* Deixa o fundo atrás da foto */
-    transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out;
-    filter: brightness(0.85);
-  }
-  
-  .foto {
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-    object-fit: cover; /* Ajusta a imagem para preencher o contêiner sem distorcer */
-    object-position: top; /* Garante que a parte superior da imagem seja visível */
-    border-radius: 50%;
-    transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out;
-    filter: brightness(0.85);
-  }
-  
-  .foto:hover {
-    transform: scale(1.1); /* Efeito de zoom suave */
-    filter: brightness(1);
-  }
-  
-  /* Hover no fundo também */
-  .hero-image-container:hover .hero-image-background {
-    transform: scale(1.1); /* Aumenta o fundo junto com a imagem */
-    filter: brightness(1); /* Aumenta o brilho do fundo */
-  }
-  
-  .hero-image-container:hover .foto {
-    transform: scale(1.1); /* Aumenta a imagem também */
-    filter: brightness(1); /* Aumenta o brilho da imagem */
-  }
-  
-  /* Animações de fadeIn e fadeInUp */
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Responsividade para telas menores */
-  @media (max-width: 768px) {
-    .hero-content {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .hero-title {
-      font-size: 2.5rem;
-    }
-  
-    .hero-description {
-      font-size: 1rem;
-    }
-  
-    .cta-button {
-      padding: 10px 30px;
-    }
-  
-    .foto {
-      width: 350px;
-      height: 350px;
-      margin-top: 2rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 2rem;
-    }
-  
-    .hero-description {
-      font-size: 0.9rem;
-    }
-  
-    .foto {
-      width: 300px;
-      height: 300px;
-    }
-  }
-  
+}
+
+.animate-pulseBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: pulseBorder 4s infinite linear;
+  pointer-events: none;
+}
+
+.img-container {
+  position: relative;
+  display: inline-block;
+}
+
+.img-container img {
+  border-radius: 50%;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.img-container:hover img {
+  transform: scale(1.05); /* Melhor controle do zoom */
+  filter: brightness(1.1);
+}

@@ -1,4 +1,4 @@
-# Portfólio
+# Portfólio (EM DESENVOLVIMENTO)
 
 Este repositório contém o código-fonte do meu portfólio pessoal, desenvolvido utilizando [Next.js](https://nextjs.org). O objetivo deste projeto é apresentar minhas habilidades, projetos e experiências profissionais.
 

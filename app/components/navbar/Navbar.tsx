@@ -1,7 +1,7 @@
-'use client'; // Necessário para usar hooks como useState
+"use client"; // Necessário para usar hooks como useState
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState } from "react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,10 @@ const Navbar = () => {
         {/* Logo */}
         <div className="text-3xl font-semibold text-white tracking-tight hover:text-blue-500 transition-colors duration-300">
           <Link href="/">
-            &lt;/PH&gt;
+            <h1>
+              <span className="text-blue-500">&lt;/</span>PH
+              <span className="text-blue-500">&gt;</span>
+            </h1>
           </Link>
         </div>
 
@@ -42,15 +45,23 @@ const Navbar = () => {
 
         {/* Navbar Links */}
         <ul
-          className={`md:flex md:items-center md:gap-8 font-medium text-lg ${isOpen ? 'block' : 'hidden'}`}
+          className={`md:flex md:items-center md:gap-8 font-medium text-lg ${
+            isOpen ? "block" : "hidden"
+          }`}
         >
-          {['Home', 'About', 'Projects', 'Skills', 'Contact'].map((item) => (
-            <li key={item}>
+          {[
+            { label: "Início", href: "home" },
+            { label: "Sobre", href: "about" },
+            { label: "Projetos", href: "projects" },
+            { label: "Habilidades", href: "skills" },
+            { label: "Contato", href: "contact" },
+          ].map(({ label, href }) => (
+            <li key={href}>
               <Link
-                href={`#${item.toLowerCase()}`}
+                href={`#${href}`}
                 className="text-white hover:text-blue-500 transition-colors duration-300"
               >
-                {item}
+                {label}
               </Link>
             </li>
           ))}

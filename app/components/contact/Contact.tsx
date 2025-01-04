@@ -1,9 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { IconType } from 'react-icons';
 import { FaWhatsapp, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-const ContactCard = ({ Icon, title, value, href }) => {
+interface ContactCardProps {
+  icon: IconType;
+  title: string;
+  value: string;
+  href: string;
+}
+
+const ContactCard = ({ icon: Icon, title, value, href }: ContactCardProps) => {
   return (
     <motion.a
       href={href}

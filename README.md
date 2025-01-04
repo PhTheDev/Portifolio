@@ -7,7 +7,7 @@ Bem-vindo ao repositório do meu **portfólio pessoal**, desenvolvido para apres
 - **[Next.js](https://nextjs.org):** Framework React para aplicações web modernas e performáticas.
 - **React:** Biblioteca para construção de interfaces de usuário interativas.
 - **JavaScript/TypeScript:** Linguagens de programação utilizadas no projeto, garantindo flexibilidade e tipagem segura.
-- **CSS/SCSS:** Para estilização de componentes e design responsivo.
+- **CSS/TailWindCSS:** Para estilização de componentes e design responsivo.
 
 ## 🚀 **Funcionalidades do Portfólio**
 

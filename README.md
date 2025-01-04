@@ -1,24 +1,23 @@
-# Portfólio (EM DESENVOLVIMENTO)
+# Portfólio Pessoal
 
-Este repositório contém o código-fonte do meu portfólio pessoal, desenvolvido utilizando [Next.js](https://nextjs.org). O objetivo deste projeto é apresentar minhas habilidades, projetos e experiências profissionais.
+Bem-vindo ao repositório do meu **portfólio pessoal**, desenvolvido para apresentar minhas habilidades, projetos e experiências profissionais de forma clara e atrativa. Este projeto foi criado utilizando o **[Next.js](https://nextjs.org)**, com foco em desempenho, modernidade e design responsivo.
 
-## Tecnologias Utilizadas
+## 🌟 **Tecnologias Utilizadas**
 
-- **[Next.js](https://nextjs.org):** Framework React para desenvolvimento web moderno.
-- **React:** Biblioteca para construção de interfaces de usuário.
-- **JavaScript/TypeScript:** Linguagens utilizadas no desenvolvimento.
-- **CSS/SCSS:** Para estilização e design responsivo.
+- **[Next.js](https://nextjs.org):** Framework React para aplicações web modernas e performáticas.
+- **React:** Biblioteca para construção de interfaces de usuário interativas.
+- **JavaScript/TypeScript:** Linguagens de programação utilizadas no projeto, garantindo flexibilidade e tipagem segura.
+- **CSS/SCSS:** Para estilização de componentes e design responsivo.
 
-## Funcionalidades
+## 🚀 **Funcionalidades do Portfólio**
 
-- Apresentação de projetos realizados.
-- Sessão com informações sobre mim.
-- Links para redes sociais e meios de contato.
-- Design responsivo para dispositivos móveis e desktops.
+- **Apresentação de Projetos:** Destaque para os principais projetos em que trabalhei, com detalhes sobre tecnologias e contribuições.
+- **Sessão "Sobre Mim":** Informações sobre minha trajetória, habilidades e valores profissionais.
+- **Links de Contato:** Acesso rápido às minhas redes sociais e canais de comunicação.
+- **Design Responsivo:** Otimizado para diferentes dispositivos, desde desktops até smartphones.
 
-## Como Rodar o Projeto (Localmente por enquanto quando finalizado eu farei o Deploy)
+## 🌐 **Acesso ao Portfólio**
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/PhTheDev/Portifolio.git
-   cd Portifolio
+Você pode conferir meu portfólio acessando o link abaixo:
+
+- **[Portfólio Pessoal](https://portifoliophf.netlify.app)**

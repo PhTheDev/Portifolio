@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-const ContactCard = ({ icon: Icon, title, value, href }) => {
+const ContactCard = ({ Icon, title, value, href }) => {
   return (
     <motion.a
       href={href}

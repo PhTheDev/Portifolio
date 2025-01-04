@@ -22,50 +22,40 @@ const Navbar = () => {
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled || isOpen
-          ? "bg-[var(--background)] shadow-lg"
+          ? "bg-gray-900/90 backdrop-blur-md border-b border-gray-800"
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex flex-wrap justify-between items-center py-4 px-4 sm:px-8">
+      <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center py-4 px-4 sm:px-8">
         {/* Logo */}
-        <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight hover:text-[var(--accent)] transition-colors duration-300">
+        <div className="relative group">
           <Link href="/">
-            <h1>
-              <span className="text-[var(--accent)]">&lt;/</span>PH
-              <span className="text-[var(--accent)]">&gt;</span>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              <span className="text-[var(--accent)] group-hover:text-white transition-colors duration-300">&lt;/</span>
+              <span className="group-hover:text-[var(--accent)] transition-colors duration-300">PH</span>
+              <span className="text-[var(--accent)] group-hover:text-white transition-colors duration-300">&gt;</span>
             </h1>
           </Link>
+          <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--accent)] group-hover:w-full transition-all duration-300"></div>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
+          className="md:hidden relative group p-2 rounded-lg hover:bg-gray-800/50 transition-all duration-300"
           onClick={toggleMenu}
           aria-label="Toggle Navigation"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {isOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            )}
-          </svg>
+          <div className="relative flex overflow-hidden items-center justify-center w-6 h-6">
+            <div className={`transform transition-all duration-300 ${
+              isOpen ? "rotate-45 translate-y-1.5" : ""
+            } absolute w-6 h-0.5 bg-white rounded`}></div>
+            <div className={`transform transition-all duration-300 ${
+              isOpen ? "opacity-0" : "opacity-100"
+            } absolute w-6 h-0.5 bg-white rounded`}></div>
+            <div className={`transform transition-all duration-300 ${
+              isOpen ? "-rotate-45 -translate-y-1.5" : ""
+            } absolute w-6 h-0.5 bg-white rounded`}></div>
+          </div>
         </button>
 
         {/* Navbar Links */}
@@ -74,21 +64,21 @@ const Navbar = () => {
             isOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="flex flex-col md:flex-row items-center gap-4 md:gap-8 mt-4 md:mt-0 font-medium text-base sm:text-lg">
+          <ul className="flex flex-col md:flex-row items-center gap-2 md:gap-8 mt-4 md:mt-0">
             {[
               { label: "Início", href: "home" },
               { label: "Sobre", href: "about" },
               { label: "Projetos", href: "projects" },
-              { label: "Habilidades", href: "skills" },
               { label: "Contato", href: "contact" },
             ].map(({ label, href }) => (
-              <li key={href} className="w-full md:w-auto">
+              <li key={href} className="w-full md:w-auto relative group">
                 <Link
                   href={`#${href}`}
                   onClick={() => setIsOpen(false)}
-                  className="block py-2 px-4 text-center text-white hover:text-[var(--accent)] transition-colors duration-300 hover:bg-gray-800/50 md:hover:bg-transparent rounded-lg"
+                  className="block py-2 px-4 text-center text-gray-300 hover:text-white transition-colors duration-300 rounded-lg group-hover:bg-gray-800/30"
                 >
                   {label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--accent)] group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
             ))}

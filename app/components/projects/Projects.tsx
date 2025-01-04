@@ -1,12 +1,27 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { SiDjango, SiNextdotjs, SiTailwindcss, SiPostgresql } from 'react-icons/si';
 import sgcImage from './images/sgc.png';
+import { IconType } from 'react-icons';
 
-const ProjectCard = ({ projeto }) => {
+interface Project {
+  id: number;
+  nome: string;
+  descricao: string;
+  imagem: StaticImageData;
+  tecnologias: IconType[];
+  github: string;
+  demo: string;
+}
+
+interface ProjectCardProps {
+  projeto: Project;
+}
+
+const ProjectCard = ({ projeto }: ProjectCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -73,7 +88,7 @@ const ProjectCard = ({ projeto }) => {
 };
 
 const Projects = () => {
-  const projetos = [
+  const projetos: Project[] = [
     {
       id: 1,
       nome: "SGC - Sistema de Gerenciamento de Chamados",
@@ -82,8 +97,7 @@ const Projects = () => {
       tecnologias: [SiDjango, SiPostgresql],
       github: "https://github.com/PhTheDev/sgc",
       demo: "https://github.com/PhTheDev/sgc",
-    },
-    // Add more projects here
+    }
   ];
 
   return (

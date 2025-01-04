@@ -1,9 +1,13 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import './Hero.css'; // Importe o arquivo CSS aqui
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGithub,
+  faLinkedin,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
+import "./Hero.css"; // Importe o arquivo CSS aqui
 
 const Hero = () => {
   return (
@@ -17,8 +21,10 @@ const Hero = () => {
           </h1>
 
           <p className="text-lg lg:text-xl opacity-90 leading-relaxed mb-8 animate-fadeIn delay-200 text-[#d1d1d1]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam dolorem repudiandae incidunt doloribus cumque, laborum cum dolore!
-             Officia, cupiditate aperiam, dolorum sed suscipit dolore, repellendus esse minus corrupti placeat veniam?
+            Desenvolvedor Full Stack focado em criar soluções tecnológicas
+            eficientes e modernas. Atualmente cursando Engenharia da Computação
+            na PUC-GO e atuando como estagiário no CRMV-GO, onde trabalho com
+            Django e Next.js para desenvolver sistemas completos e responsivos.
           </p>
 
           <div className="flex gap-6">

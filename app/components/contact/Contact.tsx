@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { IconType } from "react-icons";
 import { FaWhatsapp, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { useLanguage, LangTransition } from "../../context/LanguageContext";
 
 interface ContactMethod {
   icon: IconType;
@@ -12,36 +13,7 @@ interface ContactMethod {
   color: string;
 }
 
-const contactMethods: ContactMethod[] = [
-  {
-    icon: FaWhatsapp,
-    title: "WhatsApp",
-    value: "(62) 99932-8204",
-    href: "https://wa.me/5562999328204",
-    color: "emerald",
-  },
-  {
-    icon: FaEnvelope,
-    title: "Email",
-    value: "phthedev@gmail.com",
-    href: "mailto:phthedev@gmail.com",
-    color: "indigo",
-  },
-  {
-    icon: FaGithub,
-    title: "GitHub",
-    value: "PhTheDev",
-    href: "https://github.com/PhTheDev",
-    color: "slate",
-  },
-  {
-    icon: FaLinkedin,
-    title: "LinkedIn",
-    value: "Pedro Henrique",
-    href: "https://www.linkedin.com/in/pedro-henrique-faria-6b22932a7/",
-    color: "blue",
-  },
-];
+
 
 const colorMap: Record<string, { bg: string; text: string; border: string; hoverBg: string; hoverBorder: string }> = {
   emerald: {
@@ -85,6 +57,39 @@ const item = {
 };
 
 const Contact = () => {
+  const { dict } = useLanguage();
+
+  const contactMethods: ContactMethod[] = [
+    {
+      icon: FaWhatsapp,
+      title: dict.contact.methods.whatsapp,
+      value: "(62) 99932-8204",
+      href: "https://wa.me/5562999328204",
+      color: "emerald",
+    },
+    {
+      icon: FaEnvelope,
+      title: dict.contact.methods.email,
+      value: "phthedev@gmail.com",
+      href: "mailto:phthedev@gmail.com",
+      color: "indigo",
+    },
+    {
+      icon: FaGithub,
+      title: dict.contact.methods.github,
+      value: "PhTheDev",
+      href: "https://github.com/PhTheDev",
+      color: "slate",
+    },
+    {
+      icon: FaLinkedin,
+      title: dict.contact.methods.linkedin,
+      value: "Pedro Henrique",
+      href: "https://www.linkedin.com/in/pedro-henrique-faria-6b22932a7/",
+      color: "blue",
+    },
+  ];
+
   return (
     <section id="contact" className="relative py-24 bg-[#0a0a0f] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -101,17 +106,18 @@ const Contact = () => {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
+          <LangTransition>
           <p className="text-xs font-mono text-indigo-400 tracking-[0.2em] uppercase mb-3">
-            03. Contato
+            {dict.contact.sectionTitle}
           </p>
           <h2 className="text-4xl font-semibold text-white tracking-tight mb-4">
-            Vamos conversar
+            {dict.contact.title}
           </h2>
           <div className="w-8 h-0.5 bg-indigo-500 rounded-full mb-6" />
           <p className="text-slate-500 text-[15px] max-w-md leading-relaxed">
-            Estou aberto a novas oportunidades, projetos freelance e colaborações.
-            Pode me chamar por qualquer canal abaixo.
+            {dict.contact.description}
           </p>
+          </LangTransition>
         </motion.div>
 
         {/* Cards */}
@@ -158,17 +164,17 @@ const Contact = () => {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
           </div>
           <h3 className="text-xl font-semibold text-white mb-2">
-            Pronto para transformar suas ideias em realidade?
+            {dict.contact.cta.title}
           </h3>
           <p className="text-slate-500 text-sm mb-6 max-w-sm mx-auto">
-            Estou sempre disponível para discutir novos projetos e oportunidades.
+            {dict.contact.cta.subtitle}
           </p>
           <a
             href="mailto:phthedev@gmail.com"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white text-sm font-medium transition-all duration-200 hover:-translate-y-px"
           >
             <FaEnvelope className="w-3.5 h-3.5" />
-            Enviar mensagem
+            {dict.contact.cta.button}
           </a>
         </motion.div>
       </div>

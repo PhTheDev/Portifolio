@@ -13,10 +13,16 @@ export const metadata = {
   description: 'Meu portfólio pessoal feito com Next.js',
 };
 
+import { Providers } from './providers';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className="scroll-smooth">
-      <body>{children}</body>
+      <body>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

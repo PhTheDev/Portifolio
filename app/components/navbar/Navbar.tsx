@@ -3,10 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../../context/LanguageContext";
+import { LanguageSwitch } from "./LanguageSwitch";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { dict, language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,13 +79,15 @@ const Navbar = () => {
         </div>
         </motion.div>
 
-        {/* Mobile Menu Button */}
-        <motion.button
-          className="md:hidden relative p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
-          onClick={toggleMenu}
-          aria-label="Toggle Navigation"
-          whileTap={{ scale: 0.95 }}
-        >
+        {/* Actions (Language Toggle + Mobile Menu Button) */}
+        <div className="flex items-center gap-3">
+          <LanguageSwitch />
+          <motion.button
+            className="md:hidden relative p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
+            onClick={toggleMenu}
+            aria-label="Toggle Navigation"
+            whileTap={{ scale: 0.95 }}
+          >
           <div className="relative flex overflow-hidden items-center justify-center w-6 h-6">
             <motion.div
               animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
@@ -101,15 +106,16 @@ const Navbar = () => {
             />
           </div>
         </motion.button>
+        </div>
 
-        {/* Navbar Links (Desktop + Mobile) */}
+        {/* Navbar Links (Desktop) */}
         <div className="hidden md:block">
           <ul className="flex items-center gap-8">
             {[
-              { label: "Início", href: "home" },
-              { label: "Sobre", href: "about" },
-              { label: "Projetos", href: "projects" },
-              { label: "Contato", href: "contact" },
+              { label: dict.navbar.home, href: "home" },
+              { label: dict.navbar.about, href: "about" },
+              { label: dict.navbar.projects, href: "projects" },
+              { label: dict.navbar.contact, href: "contact" },
             ].map(({ label, href }) => (
               <motion.li
                 key={href}
@@ -146,10 +152,10 @@ const Navbar = () => {
             >
               <ul className="flex flex-col items-center gap-2 mt-4 pb-2">
                 {[
-                  { label: "Início", href: "home" },
-                  { label: "Sobre", href: "about" },
-                  { label: "Projetos", href: "projects" },
-                  { label: "Contato", href: "contact" },
+                  { label: dict.navbar.home, href: "home" },
+                  { label: dict.navbar.about, href: "about" },
+                  { label: dict.navbar.projects, href: "projects" },
+                  { label: dict.navbar.contact, href: "contact" },
                 ].map(({ label, href }, index) => (
                   <motion.li
                     key={href}

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
 const socials = [
   { icon: FaGithub, href: "https://github.com/PhTheDev", label: "GitHub" },
@@ -9,10 +10,18 @@ const socials = [
   { icon: FaInstagram, href: "https://www.instagram.com/phfaria02/", label: "Instagram" },
 ];
 
-const links = ["Início", "Sobre", "Projetos", "Contato"];
+
 
 const Footer = () => {
+  const { dict } = useLanguage();
   const year = new Date().getFullYear();
+
+  const links = [
+    { label: dict.navbar.home, href: "home" },
+    { label: dict.navbar.about, href: "about" },
+    { label: dict.navbar.projects, href: "projects" },
+    { label: dict.navbar.contact, href: "contact" },
+  ];
 
   return (
     <footer className="relative border-t border-white/[0.06] bg-[#0a0a0f]">
@@ -27,13 +36,13 @@ const Footer = () => {
 
           {/* Links */}
           <nav className="flex items-center gap-6">
-            {links.map((label) => (
+            {links.map((link) => (
               <Link
-                key={label}
-                href={`#${label.toLowerCase()}`}
+                key={link.href}
+                href={`#${link.href}`}
                 className="text-xs text-slate-600 hover:text-slate-400 transition-colors"
               >
-                {label}
+                {link.label}
               </Link>
             ))}
           </nav>
@@ -56,8 +65,8 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-700">
-          <p>© {year} Pedro Henrique. Todos os direitos reservados.</p>
-          <p>Desenvolvido com <span className="text-indigo-500">♥</span> usando Next.js e TailwindCSS</p>
+          <p>© {year} Pedro Henrique. {dict.footer.rights}</p>
+          <p>{dict.footer.developedWith} <span className="text-indigo-500">♥</span> {dict.footer.using} Next.js & TailwindCSS</p>
         </div>
       </div>
     </footer>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage, LangTransition } from "../../context/LanguageContext";
 import {
   SiDjango, SiReact, SiNextdotjs, SiTailwindcss,
   SiPython, SiGit, SiPostgresql, SiDocker, SiLinux, SiJavascript,
@@ -19,33 +20,6 @@ const skills = [
   { name: "Linux", icon: SiLinux },
 ];
 
-const infoCards = [
-  {
-    label: "Formação",
-    value: "Engenharia da Computação",
-    sub: "PUC-GO · 7º período · 2023–presente",
-    icon: "🎓",
-  },
-  {
-    label: "Experiência atual",
-    value: "Estagiário de TI",
-    sub: "CRMV-GO · 2024–presente",
-    icon: "💼",
-  },
-  {
-    label: "Localização",
-    value: "Goiânia, GO",
-    sub: "Disponível para remoto ou presencial",
-    icon: "📍",
-  },
-  {
-    label: "Foco atual",
-    value: "Django + Next.js",
-    sub: "Desenvolvimento de sistemas, DevOps e Infraestrutura",
-    icon: "⚡",
-  },
-];
-
 const container = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.08 } },
@@ -57,6 +31,35 @@ const item = {
 };
 
 const About = () => {
+  const { dict } = useLanguage();
+
+  const infoCards = [
+    {
+      label: dict.about.infoCards.degree.label,
+      value: dict.about.infoCards.degree.value,
+      sub: dict.about.infoCards.degree.sub,
+      icon: "🎓",
+    },
+    {
+      label: dict.about.infoCards.exp.label,
+      value: dict.about.infoCards.exp.value,
+      sub: dict.about.infoCards.exp.sub,
+      icon: "💼",
+    },
+    {
+      label: dict.about.infoCards.location.label,
+      value: dict.about.infoCards.location.value,
+      sub: dict.about.infoCards.location.sub,
+      icon: "📍",
+    },
+    {
+      label: dict.about.infoCards.focus.label,
+      value: dict.about.infoCards.focus.value,
+      sub: dict.about.infoCards.focus.sub,
+      icon: "⚡",
+    },
+  ];
+
   return (
     <section id="about" className="relative py-24 bg-[#0a0a0f] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -72,12 +75,14 @@ const About = () => {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
+          <LangTransition>
           <p className="text-xs font-mono text-indigo-400 tracking-[0.2em] uppercase mb-3">
-            01. Sobre mim
+            {dict.about.sectionTitle}
           </p>
           <h2 className="text-4xl font-semibold text-white tracking-tight mb-4">
-            Quem sou eu
+            {dict.about.title}
           </h2>
+          </LangTransition>
           <div className="w-8 h-0.5 bg-indigo-500 rounded-full" />
         </motion.div>
 
@@ -91,12 +96,9 @@ const About = () => {
               transition={{ duration: 0.5 }}
               className="text-slate-400 leading-relaxed mb-10 text-[15px]"
             >
-              Olá! Sou{" "}
-              <span className="text-white font-medium">Pedro Henrique Faria dos Santos Soares</span>,
-              tenho 21 anos e sou desenvolvedor.
-              Apaixonado por construir soluções completas — do banco de dados à interface.
-              Atualmente cursando Engenharia da Computação e atuando como estagiário no CRMV-GO,
-              onde já desenvolvi sistemas utilizados em âmbito nacional.
+              {dict.about.bioPart1}
+              <span className="text-white font-medium">{dict.about.bioName}</span>
+              {dict.about.bioPart2}
             </motion.p>
 
             <motion.div
@@ -133,7 +135,7 @@ const About = () => {
               viewport={{ once: true }}
               className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.2em] mb-6"
             >
-              Habilidades técnicas
+              {dict.about.skillsTitle}
             </motion.p>
             <motion.div
               variants={container}
@@ -170,18 +172,12 @@ const About = () => {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <p className="text-sm text-white font-medium">Desenvolvedor Full Stack — Estagiário</p>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-400 border border-indigo-500/20">Atual</span>
+                    <p className="text-sm text-white font-medium">{dict.about.experience.role}</p>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-400 border border-indigo-500/20">{dict.about.experience.current}</span>
                   </div>
-                  <p className="text-xs text-slate-500 mb-3">CRMV-GO · 2024 – presente</p>
+                  <p className="text-xs text-slate-500 mb-3">{dict.about.experience.period}</p>
                   <ul className="space-y-1.5">
-                    {[
-                      "Desenvolvimento de sistemas com Django e Next.js",
-                      "Criação de sistemas ativos em âmbito nacional (SGAP, Seleção)",
-                      "Arquitetura, modelagem e implementação de ponta a ponta",
-                      "Manutenção contínua de sistemas em produção",
-                      "Colaboração no SGI com outro estagiário",
-                    ].map((it) => (
+                    {dict.about.experience.items.map((it) => (
                       <li key={it} className="flex items-start gap-2 text-xs text-slate-500">
                         <span className="mt-1.5 w-1 h-1 rounded-full bg-indigo-500/60 flex-shrink-0" />
                         {it}

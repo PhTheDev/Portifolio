@@ -4,12 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin, faInstagram } from "@fortawesome/free-brands-svg-icons";
-
-const stats = [
-  { value: "2", label: "Ano de exp." },
-  { value: "5+", label: "Projetos Participados" },
-  { value: "10+", label: "Tecnologias" },
-];
+import { useLanguage, LangTransition } from "../../context/LanguageContext";
 
 const socials = [
   { href: "https://github.com/PhTheDev", icon: faGithub, label: "GitHub" },
@@ -18,6 +13,14 @@ const socials = [
 ];
 
 const Hero = () => {
+  const { dict } = useLanguage();
+
+  const stats = [
+    { value: "2", label: dict.hero.stats.exp },
+    { value: "5+", label: dict.hero.stats.projects },
+    { value: "10+", label: dict.hero.stats.tech },
+  ];
+
   return (
     <section
       id="home"
@@ -45,13 +48,14 @@ const Hero = () => {
           {/* LEFT */}
           <div className="flex-1 text-center lg:text-left">
             {/* Status */}
+            <LangTransition>
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/[0.08] bg-white/[0.03] mb-8">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
               </span>
               <span className="text-xs text-slate-400 tracking-wide">
-                Disponível para oportunidades
+                {dict.hero.status}
               </span>
             </div>
 
@@ -59,14 +63,13 @@ const Hero = () => {
             <h1 className="text-5xl md:text-6xl lg:text-[64px] font-semibold tracking-tight leading-[1.08] mb-6">
               <span className="block text-white">Pedro Henrique</span>
               <span className="block mt-1 bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                Full Stack Dev
+                {dict.hero.subtitle}
               </span>
             </h1>
 
             {/* Description */}
             <p className="text-base text-slate-500 leading-relaxed max-w-md mb-10 mx-auto lg:mx-0">
-              Estudante de Engenharia da Computação na PUC-GO e estagiário no CRMV-GO.
-              Construo sistemas completos com Django e Next.js, do backend ao frontend.
+              {dict.hero.description}
             </p>
 
             {/* Buttons */}
@@ -75,13 +78,13 @@ const Hero = () => {
                 href="#projects"
                 className="px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white text-sm font-medium transition-all duration-200 hover:-translate-y-px"
               >
-                Ver projetos
+                {dict.hero.viewProjects}
               </Link>
               <Link
                 href="#contact"
                 className="px-6 py-3 rounded-xl border border-white/[0.1] bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 text-sm font-medium transition-all duration-200"
               >
-                Entrar em contato
+                {dict.hero.contactMe}
               </Link>
             </div>
 
@@ -99,6 +102,7 @@ const Hero = () => {
                 </Link>
               ))}
             </div>
+            </LangTransition>
           </div>
 
           {/* RIGHT */}
@@ -130,7 +134,7 @@ const Hero = () => {
             </div>
 
             {/* Stats */}
-            <div className="flex gap-6">
+            <LangTransition className="flex gap-6">
               {stats.map((s) => (
                 <div key={s.label} className="text-center">
                   <div className="text-2xl font-semibold text-white tracking-tight">
@@ -141,7 +145,7 @@ const Hero = () => {
                   </div>
                 </div>
               ))}
-            </div>
+            </LangTransition>
           </div>
         </div>
       </div>

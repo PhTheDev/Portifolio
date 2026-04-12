@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { SiDjango, SiNextdotjs, SiTailwindcss, SiPostgresql } from "react-icons/si";
 import { IconType } from "react-icons";
+import { useLanguage, LangTransition } from "../../context/LanguageContext";
 
 interface Project {
   id: number;
@@ -18,86 +19,7 @@ interface Project {
   scope?: string;
 }
 
-const projetos: Project[] = [
-  {
-    id: 1,
-    nome: "SGC — Sistema de Gerenciamento de Chamados",
-    descricao:
-      "Sistema completo de gerenciamento de chamados de TI para o CRMV-GO, com tracking, priorização e geração de relatórios. Desenvolvido do zero: da modelagem à manutenção.",
-    tecnologias: [
-      { icon: SiDjango, name: "Django" },
-      { icon: SiPostgresql, name: "PostgreSQL" },
-    ],
-    github: "https://github.com/PhTheDev/sgc",
-    demo: "https://sgc.crmvgo.org.br",
-    featured: true,
-  },
-  {
-    id: 2,
-    nome: "SGAP — Sistema de Gestão de Almoxarifado e Patrimônio",
-    descricao:
-      "Criado por completo — da licitação de requisitos e modelagem até a manutenção atual. Sistema ativo em âmbito nacional, utilizado por conselhos em todo o Brasil.",
-      tecnologias: [
-        { icon: SiNextdotjs, name: "Next.js" },
-        { icon: SiTailwindcss, name: "TailwindCSS" },
-        { icon: SiDjango, name: "Django" },
-        { icon: SiPostgresql, name: "PostgreSQL" },
-      ],
-    demo: "https://sgap.crmvgo.org.br",
-    featured: true,
-    scope: "Nacional",
-  },
-  {
-    id: 3,
-    nome: "Seleção CRMV-GO — Sistema de Seleção de Estagiários",
-    descricao:
-      "Sistema desenvolvido por completo desde a modelagem até a manutenção. Utilizado em âmbito nacional por conselhos em todo o Brasil para seleção de estagiários.",
-      tecnologias: [
-        { icon: SiNextdotjs, name: "Next.js" },
-        { icon: SiTailwindcss, name: "TailwindCSS" },
-        { icon: SiDjango, name: "Django" },
-        { icon: SiPostgresql, name: "PostgreSQL" },
-      ],
-    demo: "https://selecao.crmvgo.org.br",
-    scope: "Nacional",
-  },
-  {
-    id: 4,
-    nome: "SGD — Sistema de Gestão de Denúncias",
-    descricao:
-      "Colaborei com o chefe na finalização do sistema e na correção de bugs. Sistema voltado ao gerenciamento de denúncias do CRMV-GO.",
-    tecnologias: [
-      { icon: SiDjango, name: "Django" },
-      { icon: SiPostgresql, name: "PostgreSQL" },
-    ],
-    demo: "https://sgd.crmvgo.org.br",
-  },
-  {
-    id: 5,
-    nome: "SGI — Sistema de Gestão Integrada",
-    descricao:
-      "Em desenvolvimento. Projeto conjunto com outro estagiário — participei da arquitetura, modelagem e implementação do frontend. Será o sistema mais completo do CRMV-GO.",
-    tecnologias: [
-      { icon: SiNextdotjs, name: "Next.js" },
-      { icon: SiTailwindcss, name: "TailwindCSS" },
-      { icon: SiDjango, name: "Django" },
-      { icon: SiPostgresql, name: "PostgreSQL" },
-    ],
-    wip: true,
-    badge: "Em breve",
-  },
-  {
-    id: 6,
-    nome: "Portfólio Pessoal",
-    descricao:
-      "Este portfólio! Desenvolvido com Next.js 14 e TailwindCSS, com animações suaves e design responsivo.",
-    tecnologias: [
-      { icon: SiNextdotjs, name: "Next.js" },
-      { icon: SiTailwindcss, name: "TailwindCSS" },
-    ],
-    github: "https://github.com/PhTheDev",
-  },
-];
+
 
 const container = {
   hidden: { opacity: 0 },
@@ -109,7 +31,7 @@ const cardVariant = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const ProjectCard = ({ projeto }: { projeto: Project }) => (
+const ProjectCard = ({ projeto, dict }: { projeto: Project; dict: any }) => (
   <motion.div
     variants={cardVariant}
     whileHover={{ y: -4 }}
@@ -123,17 +45,17 @@ const ProjectCard = ({ projeto }: { projeto: Project }) => (
     <div className="absolute top-4 right-4 z-10 flex flex-col gap-2 items-end">
       {projeto.featured && (
         <span className="text-[10px] px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-medium tracking-wide">
-          Destaque
+          {dict.projects.badges.featured}
         </span>
       )}
       {projeto.scope === "Nacional" && (
         <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 font-medium tracking-wide">
-          🇧🇷 Nacional
+          🇧🇷 {dict.projects.badges.national}
         </span>
       )}
       {projeto.wip && (
         <span className="text-[10px] px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/25 font-medium tracking-wide">
-          Em breve
+          {dict.projects.badges.wip}
         </span>
       )}
     </div>
@@ -185,7 +107,7 @@ const ProjectCard = ({ projeto }: { projeto: Project }) => (
             className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors"
           >
             <FaGithub className="w-3.5 h-3.5" />
-            Código fonte
+            {dict.projects.links.source}
           </a>
         )}
         {projeto.demo && !projeto.wip && (
@@ -196,11 +118,11 @@ const ProjectCard = ({ projeto }: { projeto: Project }) => (
             className="flex items-center gap-2 text-xs text-slate-500 hover:text-indigo-400 transition-colors ml-auto"
           >
             <FaExternalLinkAlt className="w-3 h-3" />
-            Ver sistema
+            {dict.projects.links.demo}
           </a>
         )}
         {projeto.wip && (
-          <span className="text-xs text-slate-700 ml-auto italic">Em desenvolvimento</span>
+          <span className="text-xs text-slate-700 ml-auto italic">{dict.projects.links.wip}</span>
         )}
       </div>
     </div>
@@ -208,6 +130,83 @@ const ProjectCard = ({ projeto }: { projeto: Project }) => (
 );
 
 const Projects = () => {
+  const { dict } = useLanguage();
+
+  const projetos: Project[] = [
+    {
+      id: 1,
+      nome: dict.projects.items.sgc.name,
+      descricao: dict.projects.items.sgc.desc,
+      tecnologias: [
+        { icon: SiDjango, name: "Django" },
+        { icon: SiPostgresql, name: "PostgreSQL" },
+      ],
+      github: "https://github.com/PhTheDev/sgc",
+      demo: "https://sgc.crmvgo.org.br",
+      featured: true,
+    },
+    {
+      id: 2,
+      nome: dict.projects.items.sgap.name,
+      descricao: dict.projects.items.sgap.desc,
+      tecnologias: [
+        { icon: SiNextdotjs, name: "Next.js" },
+        { icon: SiTailwindcss, name: "TailwindCSS" },
+        { icon: SiDjango, name: "Django" },
+        { icon: SiPostgresql, name: "PostgreSQL" },
+      ],
+      demo: "https://sgap.crmvgo.org.br",
+      featured: true,
+      scope: "Nacional",
+    },
+    {
+      id: 3,
+      nome: dict.projects.items.selecao.name,
+      descricao: dict.projects.items.selecao.desc,
+      tecnologias: [
+        { icon: SiNextdotjs, name: "Next.js" },
+        { icon: SiTailwindcss, name: "TailwindCSS" },
+        { icon: SiDjango, name: "Django" },
+        { icon: SiPostgresql, name: "PostgreSQL" },
+      ],
+      demo: "https://selecao.crmvgo.org.br",
+      scope: "Nacional",
+    },
+    {
+      id: 4,
+      nome: dict.projects.items.sgd.name,
+      descricao: dict.projects.items.sgd.desc,
+      tecnologias: [
+        { icon: SiDjango, name: "Django" },
+        { icon: SiPostgresql, name: "PostgreSQL" },
+      ],
+      demo: "https://sgd.crmvgo.org.br",
+    },
+    {
+      id: 5,
+      nome: dict.projects.items.sgi.name,
+      descricao: dict.projects.items.sgi.desc,
+      tecnologias: [
+        { icon: SiNextdotjs, name: "Next.js" },
+        { icon: SiTailwindcss, name: "TailwindCSS" },
+        { icon: SiDjango, name: "Django" },
+        { icon: SiPostgresql, name: "PostgreSQL" },
+      ],
+      wip: true,
+      badge: "Em breve",
+    },
+    {
+      id: 6,
+      nome: dict.projects.items.portfolio.name,
+      descricao: dict.projects.items.portfolio.desc,
+      tecnologias: [
+        { icon: SiNextdotjs, name: "Next.js" },
+        { icon: SiTailwindcss, name: "TailwindCSS" },
+      ],
+      github: "https://github.com/PhTheDev",
+    },
+  ];
+
   return (
     <section id="projects" className="relative py-24 bg-[#0a0a0f] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -224,13 +223,14 @@ const Projects = () => {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
+          <LangTransition>
           <p className="text-xs font-mono text-indigo-400 tracking-[0.2em] uppercase mb-3">
-            02. Projetos
+            {dict.projects.sectionTitle}
           </p>
           <div className="flex items-end justify-between gap-4">
             <div>
               <h2 className="text-4xl font-semibold text-white tracking-tight mb-4">
-                O que eu construí
+                {dict.projects.title}
               </h2>
               <div className="w-8 h-0.5 bg-indigo-500 rounded-full" />
             </div>
@@ -240,13 +240,14 @@ const Projects = () => {
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-2 text-xs text-slate-500 hover:text-indigo-400 transition-colors mb-4"
             >
-              Ver todos no GitHub
+              {dict.projects.viewAllGithub}
               <FaExternalLinkAlt className="w-3 h-3" />
             </a>
           </div>
           <p className="text-slate-600 text-sm mt-4 max-w-lg">
-            Sistemas desenvolvidos durante o estágio no CRMV-GO — alguns deles ativos em âmbito nacional, usados por conselhos em todo o Brasil.
+            {dict.projects.description}
           </p>
+          </LangTransition>
         </motion.div>
 
         <motion.div
@@ -257,7 +258,7 @@ const Projects = () => {
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {projetos.map((p) => (
-            <ProjectCard key={p.id} projeto={p} />
+            <ProjectCard key={p.id} projeto={p} dict={dict} />
           ))}
         </motion.div>
 
@@ -276,7 +277,7 @@ const Projects = () => {
             className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-white transition-colors"
           >
             <FaGithub className="w-4 h-4" />
-            Mais projetos no GitHub
+            {dict.projects.moreOnGithub}
           </a>
         </motion.div>
       </div>

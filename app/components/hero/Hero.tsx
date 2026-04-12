@@ -27,11 +27,13 @@ const Hero = () => {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-violet-600/10 rounded-full blur-[120px]" />
+
         {/* Subtle grid */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />
@@ -39,18 +41,21 @@ const Hero = () => {
 
       <div className="relative max-w-6xl mx-auto px-6 lg:px-8 w-full">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-          {/* Left */}
+          
+          {/* LEFT */}
           <div className="flex-1 text-center lg:text-left">
-            {/* Status badge */}
+            {/* Status */}
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/[0.08] bg-white/[0.03] mb-8">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
               </span>
-              <span className="text-xs text-slate-400 tracking-wide">Disponível para oportunidades</span>
+              <span className="text-xs text-slate-400 tracking-wide">
+                Disponível para oportunidades
+              </span>
             </div>
 
-            {/* Heading */}
+            {/* Title */}
             <h1 className="text-5xl md:text-6xl lg:text-[64px] font-semibold tracking-tight leading-[1.08] mb-6">
               <span className="block text-white">Pedro Henrique</span>
               <span className="block mt-1 bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
@@ -64,7 +69,7 @@ const Hero = () => {
               Construo sistemas completos com Django e Next.js, do backend ao frontend.
             </p>
 
-            {/* Actions */}
+            {/* Buttons */}
             <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-10">
               <Link
                 href="#projects"
@@ -80,7 +85,7 @@ const Hero = () => {
               </Link>
             </div>
 
-            {/* Socials */}
+            {/* Social */}
             <div className="flex gap-3 justify-center lg:justify-start">
               {socials.map((s) => (
                 <Link
@@ -96,22 +101,31 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right */}
+          {/* RIGHT */}
           <div className="flex flex-col items-center gap-8">
-            {/* Photo */}
-            <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 blur-2xl opacity-20 scale-110" />
-              <div className="relative w-56 h-56 lg:w-72 lg:h-72 rounded-full p-px bg-gradient-to-br from-indigo-500/50 via-violet-500/30 to-transparent">
-                <div className="w-full h-full rounded-full overflow-hidden border border-white/[0.06]">
-                  <Image
-                    src="/images/foto.png"
-                    alt="Pedro Henrique"
-                    width={288}
-                    height={288}
-                    className="w-full h-full object-cover"
-                    priority
-                  />
-                </div>
+            
+            {/* FOTO PROFISSIONAL */}
+            <div className="relative w-[260px] lg:w-[340px] group">
+              
+              {/* Glow atrás */}
+              <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/20 via-violet-500/10 to-transparent blur-3xl opacity-60 scale-110" />
+
+              {/* Imagem */}
+              <div className="relative">
+                <Image
+                  src="/images/foto.png"
+                  alt="Pedro Henrique"
+                  width={400}
+                  height={500}
+                  priority
+                  className="
+  w-full h-auto object-contain
+  drop-shadow-[0_25px_80px_rgba(0,0,0,0.7)]
+  transition-all duration-500 group-hover:scale-[1.03]
+
+  [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]
+"
+                />
               </div>
             </div>
 
@@ -119,8 +133,12 @@ const Hero = () => {
             <div className="flex gap-6">
               {stats.map((s) => (
                 <div key={s.label} className="text-center">
-                  <div className="text-2xl font-semibold text-white tracking-tight">{s.value}</div>
-                  <div className="text-xs text-slate-500 mt-0.5 whitespace-nowrap">{s.label}</div>
+                  <div className="text-2xl font-semibold text-white tracking-tight">
+                    {s.value}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-0.5 whitespace-nowrap">
+                    {s.label}
+                  </div>
                 </div>
               ))}
             </div>

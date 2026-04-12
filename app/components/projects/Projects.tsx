@@ -1,134 +1,284 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Image, { StaticImageData } from "next/image";
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { SiDjango, SiNextdotjs, SiTailwindcss, SiPostgresql } from 'react-icons/si';
-import sgcImage from './images/sgc.png';
-import { IconType } from 'react-icons';
+import { motion } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { SiDjango, SiNextdotjs, SiTailwindcss, SiPostgresql } from "react-icons/si";
+import { IconType } from "react-icons";
 
 interface Project {
   id: number;
   nome: string;
   descricao: string;
-  imagem: StaticImageData;
-  tecnologias: IconType[];
-  github: string;
-  demo: string;
+  tecnologias: { icon: IconType; name: string }[];
+  github?: string;
+  demo?: string;
+  featured?: boolean;
+  wip?: boolean;
+  badge?: string;
+  scope?: string;
 }
 
-interface ProjectCardProps {
-  projeto: Project;
-}
+const projetos: Project[] = [
+  {
+    id: 1,
+    nome: "SGC — Sistema de Gerenciamento de Chamados",
+    descricao:
+      "Sistema completo de gerenciamento de chamados de TI para o CRMV-GO, com tracking, priorização e geração de relatórios. Desenvolvido do zero: da modelagem à manutenção.",
+    tecnologias: [
+      { icon: SiDjango, name: "Django" },
+      { icon: SiPostgresql, name: "PostgreSQL" },
+    ],
+    github: "https://github.com/PhTheDev/sgc",
+    demo: "https://sgc.crmvgo.org.br",
+    featured: true,
+  },
+  {
+    id: 2,
+    nome: "SGAP — Sistema de Gestão de Almoxarifado e Patrimônio",
+    descricao:
+      "Criado por completo — da licitação de requisitos e modelagem até a manutenção atual. Sistema ativo em âmbito nacional, utilizado por conselhos em todo o Brasil.",
+      tecnologias: [
+        { icon: SiNextdotjs, name: "Next.js" },
+        { icon: SiTailwindcss, name: "TailwindCSS" },
+        { icon: SiDjango, name: "Django" },
+        { icon: SiPostgresql, name: "PostgreSQL" },
+      ],
+    demo: "https://sgap.crmvgo.org.br",
+    featured: true,
+    scope: "Nacional",
+  },
+  {
+    id: 3,
+    nome: "Seleção CRMV-GO — Sistema de Seleção de Estagiários",
+    descricao:
+      "Sistema desenvolvido por completo desde a modelagem até a manutenção. Utilizado em âmbito nacional por conselhos em todo o Brasil para seleção de estagiários.",
+      tecnologias: [
+        { icon: SiNextdotjs, name: "Next.js" },
+        { icon: SiTailwindcss, name: "TailwindCSS" },
+        { icon: SiDjango, name: "Django" },
+        { icon: SiPostgresql, name: "PostgreSQL" },
+      ],
+    demo: "https://selecao.crmvgo.org.br",
+    scope: "Nacional",
+  },
+  {
+    id: 4,
+    nome: "SGD — Sistema de Gestão de Denúncias",
+    descricao:
+      "Colaborei com o chefe na finalização do sistema e na correção de bugs. Sistema voltado ao gerenciamento de denúncias do CRMV-GO.",
+    tecnologias: [
+      { icon: SiDjango, name: "Django" },
+      { icon: SiPostgresql, name: "PostgreSQL" },
+    ],
+    demo: "https://sgd.crmvgo.org.br",
+  },
+  {
+    id: 5,
+    nome: "SGI — Sistema de Gestão Integrada",
+    descricao:
+      "Em desenvolvimento. Projeto conjunto com outro estagiário — participei da arquitetura, modelagem e implementação do frontend. Será o sistema mais completo do CRMV-GO.",
+    tecnologias: [
+      { icon: SiNextdotjs, name: "Next.js" },
+      { icon: SiTailwindcss, name: "TailwindCSS" },
+      { icon: SiDjango, name: "Django" },
+      { icon: SiPostgresql, name: "PostgreSQL" },
+    ],
+    wip: true,
+    badge: "Em breve",
+  },
+  {
+    id: 6,
+    nome: "Portfólio Pessoal",
+    descricao:
+      "Este portfólio! Desenvolvido com Next.js 14 e TailwindCSS, com animações suaves e design responsivo.",
+    tecnologias: [
+      { icon: SiNextdotjs, name: "Next.js" },
+      { icon: SiTailwindcss, name: "TailwindCSS" },
+    ],
+    github: "https://github.com/PhTheDev",
+  },
+];
 
-const ProjectCard = ({ projeto }: ProjectCardProps) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="group relative overflow-hidden rounded-xl bg-gray-900/50 border border-gray-800/50 backdrop-blur-sm"
-    >
-      {/* Image Container */}
-      <div className="relative h-64 overflow-hidden">
-        <Image
-          src={projeto.imagem}
-          alt={`Screenshot of ${projeto.nome}`}
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
-          fill
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </div>
-
-      {/* Content */}
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-3">
-          {projeto.tecnologias.map((Tech, index) => (
-            <Tech key={index} className="text-[var(--accent)] text-xl" />
-          ))}
-        </div>
-
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[var(--accent)] transition-colors">
-          {projeto.nome}
-        </h3>
-
-        <p className="text-gray-400 mb-4">
-          {projeto.descricao}
-        </p>
-
-        {/* Links */}
-        <div className="flex gap-4">
-          {projeto.github && (
-            <a
-              href={projeto.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-            >
-              <FaGithub className="text-lg" />
-              Código
-            </a>
-          )}
-          {projeto.demo && (
-            <a
-              href={projeto.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-            >
-              <FaExternalLinkAlt className="text-lg" />
-              Demo
-            </a>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-const Projects = () => {
-  const projetos: Project[] = [
-    {
-      id: 1,
-      nome: "SGC - Sistema de Gerenciamento de Chamados",
-      descricao: "Sistema completo de gerenciamento de chamados de TI desenvolvido para o CRMV-GO, com funcionalidades de tracking, priorização e relatórios.",
-      imagem: sgcImage,
-      tecnologias: [SiDjango, SiPostgresql],
-      github: "https://github.com/PhTheDev/sgc",
-      demo: "https://github.com/PhTheDev/sgc",
-    }
-  ];
+const cardVariant = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
-  return (
-    <section id="projects" className="relative py-24 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] to-gray-900">
-        <div className="absolute top-40 -left-20 w-72 h-72 bg-[var(--accent)]/20 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-40 -right-20 w-72 h-72 bg-purple-500/20 rounded-full filter blur-3xl"></div>
+const ProjectCard = ({ projeto }: { projeto: Project }) => (
+  <motion.div
+    variants={cardVariant}
+    whileHover={{ y: -4 }}
+    className={`group relative flex flex-col rounded-2xl overflow-hidden border transition-all duration-300 ${
+      projeto.featured
+        ? "border-indigo-500/25 bg-indigo-500/[0.04] hover:border-indigo-500/40"
+        : "border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12]"
+    }`}
+  >
+    {/* Badges */}
+    <div className="absolute top-4 right-4 z-10 flex flex-col gap-2 items-end">
+      {projeto.featured && (
+        <span className="text-[10px] px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-medium tracking-wide">
+          Destaque
+        </span>
+      )}
+      {projeto.scope === "Nacional" && (
+        <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 font-medium tracking-wide">
+          🇧🇷 Nacional
+        </span>
+      )}
+      {projeto.wip && (
+        <span className="text-[10px] px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/25 font-medium tracking-wide">
+          Em breve
+        </span>
+      )}
+    </div>
+
+    {/* Placeholder visual */}
+    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-[#0f0f1a] to-[#13131f] border-b border-white/[0.04]">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="flex gap-4 opacity-[0.08]">
+          {projeto.tecnologias.map(({ icon: Icon, name }) => (
+            <Icon key={name} className="w-10 h-10 text-white" />
+          ))}
+        </div>
+      </div>
+      {projeto.featured && (
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 to-violet-900/10" />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent opacity-80" />
+    </div>
+
+    {/* Body */}
+    <div className="flex flex-col flex-1 p-6">
+      {/* Tech tags */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {projeto.tecnologias.map(({ icon: Icon, name }) => (
+          <span
+            key={name}
+            className="flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-lg border border-white/[0.07] bg-white/[0.03] text-slate-400"
+          >
+            <Icon className="w-3 h-3 text-indigo-400" />
+            {name}
+          </span>
+        ))}
       </div>
 
-      <div className="relative container mx-auto px-4 max-w-6xl">
+      <h3 className="text-white font-medium text-[15px] leading-snug mb-2 group-hover:text-indigo-200 transition-colors">
+        {projeto.nome}
+      </h3>
+      <p className="text-slate-500 text-sm leading-relaxed flex-1 mb-6">
+        {projeto.descricao}
+      </p>
+
+      {/* Links */}
+      <div className="flex items-center gap-4 pt-4 border-t border-white/[0.05]">
+        {projeto.github && (
+          <a
+            href={projeto.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors"
+          >
+            <FaGithub className="w-3.5 h-3.5" />
+            Código fonte
+          </a>
+        )}
+        {projeto.demo && !projeto.wip && (
+          <a
+            href={projeto.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-xs text-slate-500 hover:text-indigo-400 transition-colors ml-auto"
+          >
+            <FaExternalLinkAlt className="w-3 h-3" />
+            Ver sistema
+          </a>
+        )}
+        {projeto.wip && (
+          <span className="text-xs text-slate-700 ml-auto italic">Em desenvolvimento</span>
+        )}
+      </div>
+    </div>
+  </motion.div>
+);
+
+const Projects = () => {
+  return (
+    <section id="projects" className="relative py-24 bg-[#0a0a0f] overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-indigo-500/30 to-transparent" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-violet-600/8 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="mb-16"
         >
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-[var(--accent)] to-purple-500 bg-clip-text text-transparent">
-            Meus Projetos
-          </h2>
-          <div className="mt-4 h-1 w-20 bg-gradient-to-r from-[var(--accent)] to-purple-500 mx-auto rounded-full"></div>
-          <p className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto">
-            Uma seleção dos meus projetos mais recentes, demonstrando minhas habilidades em desenvolvimento full-stack.
+          <p className="text-xs font-mono text-indigo-400 tracking-[0.2em] uppercase mb-3">
+            02. Projetos
+          </p>
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h2 className="text-4xl font-semibold text-white tracking-tight mb-4">
+                O que eu construí
+              </h2>
+              <div className="w-8 h-0.5 bg-indigo-500 rounded-full" />
+            </div>
+            <a
+              href="https://github.com/PhTheDev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-2 text-xs text-slate-500 hover:text-indigo-400 transition-colors mb-4"
+            >
+              Ver todos no GitHub
+              <FaExternalLinkAlt className="w-3 h-3" />
+            </a>
+          </div>
+          <p className="text-slate-600 text-sm mt-4 max-w-lg">
+            Sistemas desenvolvidos durante o estágio no CRMV-GO — alguns deles ativos em âmbito nacional, usados por conselhos em todo o Brasil.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projetos.map((projeto) => (
-            <ProjectCard key={projeto.id} projeto={projeto} />
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {projetos.map((p) => (
+            <ProjectCard key={p.id} projeto={p} />
           ))}
-        </div>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-10 text-center"
+        >
+          <a
+            href="https://github.com/PhTheDev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-white transition-colors"
+          >
+            <FaGithub className="w-4 h-4" />
+            Mais projetos no GitHub
+          </a>
+        </motion.div>
       </div>
     </section>
   );

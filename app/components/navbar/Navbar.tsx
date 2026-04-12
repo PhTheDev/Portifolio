@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,23 +12,58 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  // Variantes para animações
+  const navVariants = {
+    top: { backgroundColor: "rgba(17, 24, 39, 0)", backdropFilter: "blur(0px)" },
+    scrolled: { backgroundColor: "rgba(17, 24, 39, 0.9)", backdropFilter: "blur(8px)" },
+  };
+
+  const logoLetterVariants = {
+    rest: { color: "var(--accent)" },
+    hover: { color: "#ffffff", transition: { duration: 0.3 } },
+  };
+
+  const underlineVariants = {
+    rest: { width: 0 },
+    hover: { width: "100%", transition: { duration: 0.3 } },
+  };
+
+  const mobileMenuVariants = {
+    hidden: { opacity: 0, height: 0, transition: { duration: 0.3 } },
+    visible: { opacity: 1, height: "auto", transition: { duration: 0.3 } },
+  };
+
+  const linkItemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.05, duration: 0.3 },
+    }),
+  };
+
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled || isOpen
-          ? "bg-gray-900/90 backdrop-blur-md border-b border-gray-800"
-          : "bg-transparent"
-      }`}
+    <motion.nav
+      initial="top"
+      animate={scrolled || isOpen ? "scrolled" : "top"}
+      variants={navVariants}
+      className="fixed w-full z-50 border-b border-gray-800/50"
     >
       <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center py-4 px-4 sm:px-8">
         {/* Logo */}
+        <motion.div
+          className="relative group"
+          whileHover="hover"
+          initial="rest"
+          animate="rest"
+        >
+          {/* Logo */}
         <div className="relative group">
           <Link href="/">
             <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
@@ -38,54 +74,107 @@ const Navbar = () => {
           </Link>
           <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--accent)] group-hover:w-full transition-all duration-300"></div>
         </div>
+        </motion.div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden relative group p-2 rounded-lg hover:bg-gray-800/50 transition-all duration-300"
+        <motion.button
+          className="md:hidden relative p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
           onClick={toggleMenu}
           aria-label="Toggle Navigation"
+          whileTap={{ scale: 0.95 }}
         >
           <div className="relative flex overflow-hidden items-center justify-center w-6 h-6">
-            <div className={`transform transition-all duration-300 ${
-              isOpen ? "rotate-45 translate-y-1.5" : ""
-            } absolute w-6 h-0.5 bg-white rounded`}></div>
-            <div className={`transform transition-all duration-300 ${
-              isOpen ? "opacity-0" : "opacity-100"
-            } absolute w-6 h-0.5 bg-white rounded`}></div>
-            <div className={`transform transition-all duration-300 ${
-              isOpen ? "-rotate-45 -translate-y-1.5" : ""
-            } absolute w-6 h-0.5 bg-white rounded`}></div>
+            <motion.div
+              animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute w-6 h-0.5 bg-white rounded"
+            />
+            <motion.div
+              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="absolute w-6 h-0.5 bg-white rounded"
+            />
+            <motion.div
+              animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute w-6 h-0.5 bg-white rounded"
+            />
           </div>
-        </button>
+        </motion.button>
 
-        {/* Navbar Links */}
-        <div
-          className={`w-full md:w-auto md:flex transition-all duration-300 ${
-            isOpen ? "block" : "hidden"
-          }`}
-        >
-          <ul className="flex flex-col md:flex-row items-center gap-2 md:gap-8 mt-4 md:mt-0">
+        {/* Navbar Links (Desktop + Mobile) */}
+        <div className="hidden md:block">
+          <ul className="flex items-center gap-8">
             {[
               { label: "Início", href: "home" },
               { label: "Sobre", href: "about" },
               { label: "Projetos", href: "projects" },
               { label: "Contato", href: "contact" },
             ].map(({ label, href }) => (
-              <li key={href} className="w-full md:w-auto relative group">
+              <motion.li
+                key={href}
+                className="relative group"
+                whileHover="hover"
+                initial="rest"
+                animate="rest"
+              >
                 <Link
                   href={`#${href}`}
-                  onClick={() => setIsOpen(false)}
-                  className="block py-2 px-4 text-center text-gray-300 hover:text-white transition-colors duration-300 rounded-lg group-hover:bg-gray-800/30"
+                  className="py-2 text-gray-300 hover:text-white transition-colors duration-300"
                 >
                   {label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--accent)] group-hover:w-full transition-all duration-300"></span>
                 </Link>
-              </li>
+                <motion.span
+                  className="absolute bottom-0 left-0 h-0.5 bg-[var(--accent)]"
+                  variants={underlineVariants}
+                />
+              </motion.li>
             ))}
           </ul>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              key="mobile-menu"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={mobileMenuVariants}
+              className="w-full md:hidden overflow-hidden"
+            >
+              <ul className="flex flex-col items-center gap-2 mt-4 pb-2">
+                {[
+                  { label: "Início", href: "home" },
+                  { label: "Sobre", href: "about" },
+                  { label: "Projetos", href: "projects" },
+                  { label: "Contato", href: "contact" },
+                ].map(({ label, href }, index) => (
+                  <motion.li
+                    key={href}
+                    className="w-full"
+                    custom={index}
+                    variants={linkItemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                  >
+                    <Link
+                      href={`#${href}`}
+                      onClick={() => setIsOpen(false)}
+                      className="block py-2 px-4 text-center text-gray-300 hover:text-white hover:bg-gray-800/30 rounded-lg transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

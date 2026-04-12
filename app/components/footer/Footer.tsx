@@ -1,90 +1,63 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import Link from "next/link";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+
+const socials = [
+  { icon: FaGithub, href: "https://github.com/PhTheDev", label: "GitHub" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/in/pedro-henrique-faria-6b22932a7/", label: "LinkedIn" },
+  { icon: FaInstagram, href: "https://www.instagram.com/phfaria02/", label: "Instagram" },
+];
+
+const links = ["Início", "Sobre", "Projetos", "Contato"];
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  
-  const socialLinks = [
-    {
-      icon: FaGithub,
-      href: "https://github.com/PhTheDev",
-      label: "GitHub"
-    },
-    {
-      icon: FaLinkedin,
-      href: "https://www.linkedin.com/in/pedro-henrique-faria-6b22932a7/",
-      label: "LinkedIn"
-    },
-    {
-      icon: FaInstagram,
-      href: "https://www.instagram.com/phfaria02/",
-      label: "Instagram"
-    }
-  ];
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-gray-900/50 border-t border-gray-800/50 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+    <footer className="relative border-t border-white/[0.06] bg-[#0a0a0f]">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8 py-10">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Logo */}
-          <div className="text-center md:text-left">
-            <Link href="/">
-              <h3 className="text-2xl font-bold">
-                <span className="text-[var(--accent)]">&lt;/</span>
-                PH
-                <span className="text-[var(--accent)]">&gt;</span>
-              </h3>
-            </Link>
-          </div>
+          <Link href="/" className="font-mono text-base">
+            <span className="text-indigo-400">&lt;</span>
+            <span className="text-white font-semibold">PH</span>
+            <span className="text-indigo-400">/&gt;</span>
+          </Link>
 
-          {/* Navigation */}
-          <nav className="text-center">
-            <ul className="flex justify-center space-x-6">
-              {['Início', 'Sobre', 'Projetos', 'Contato'].map((item) => (
-                <li key={item}>
-                  <Link 
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-400 hover:text-[var(--accent)] transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Links */}
+          <nav className="flex items-center gap-6">
+            {links.map((label) => (
+              <Link
+                key={label}
+                href={`#${label.toLowerCase()}`}
+                className="text-xs text-slate-600 hover:text-slate-400 transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Social Links */}
-          <div className="flex justify-center md:justify-end space-x-4">
-            {socialLinks.map((social) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
+          {/* Socials */}
+          <div className="flex items-center gap-3">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-gray-400 hover:text-[var(--accent)] transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={social.label}
+                aria-label={s.label}
+                className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/[0.06] text-slate-600 hover:text-slate-300 hover:border-white/[0.12] transition-all"
               >
-                <social.icon className="w-6 h-6" />
-              </motion.a>
+                <s.icon className="w-3.5 h-3.5" />
+              </a>
             ))}
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-8 pt-8 border-t border-gray-800/50 text-center text-gray-400">
-          <p>
-            © {currentYear} Pedro Henrique. Todos os direitos reservados.
-          </p>
-          <p className="mt-2 text-sm">
-            Desenvolvido com 
-            <span className="text-[var(--accent)]"> ❤ </span>
-            usando Next.js e TailwindCSS
-          </p>
+        <div className="mt-8 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-700">
+          <p>© {year} Pedro Henrique. Todos os direitos reservados.</p>
+          <p>Desenvolvido com <span className="text-indigo-500">♥</span> usando Next.js e TailwindCSS</p>
         </div>
       </div>
     </footer>

@@ -1,126 +1,175 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { IconType } from 'react-icons';
-import { FaWhatsapp, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import { IconType } from "react-icons";
+import { FaWhatsapp, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
-interface ContactCardProps {
+interface ContactMethod {
   icon: IconType;
   title: string;
   value: string;
   href: string;
+  color: string;
 }
 
-const ContactCard = ({ icon: Icon, title, value, href }: ContactCardProps) => {
-  return (
-    <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className="group p-6 rounded-xl bg-gray-800/30 border border-gray-700/50 hover:border-[var(--accent)] transition-all duration-300"
-    >
-      <div className="flex items-center gap-4">
-        <div className="p-4 rounded-full bg-[var(--accent)]/10 group-hover:bg-[var(--accent)]/20 transition-all">
-          <Icon className="w-6 h-6 text-[var(--accent)]" />
-        </div>
-        <div>
-          <h3 className="font-semibold text-lg mb-1 text-white group-hover:text-[var(--accent)] transition-colors">
-            {title}
-          </h3>
-          <p className="text-gray-400 group-hover:text-white transition-colors">
-            {value}
-          </p>
-        </div>
-      </div>
-    </motion.a>
-  );
+const contactMethods: ContactMethod[] = [
+  {
+    icon: FaWhatsapp,
+    title: "WhatsApp",
+    value: "(62) 99932-8204",
+    href: "https://wa.me/5562999328204",
+    color: "emerald",
+  },
+  {
+    icon: FaEnvelope,
+    title: "Email",
+    value: "phthedev@gmail.com",
+    href: "mailto:phthedev@gmail.com",
+    color: "indigo",
+  },
+  {
+    icon: FaGithub,
+    title: "GitHub",
+    value: "PhTheDev",
+    href: "https://github.com/PhTheDev",
+    color: "slate",
+  },
+  {
+    icon: FaLinkedin,
+    title: "LinkedIn",
+    value: "Pedro Henrique",
+    href: "https://www.linkedin.com/in/pedro-henrique-faria-6b22932a7/",
+    color: "blue",
+  },
+];
+
+const colorMap: Record<string, { bg: string; text: string; border: string; hoverBg: string; hoverBorder: string }> = {
+  emerald: {
+    bg: "bg-emerald-500/10",
+    text: "text-emerald-400",
+    border: "border-emerald-500/20",
+    hoverBg: "hover:bg-emerald-500/[0.06]",
+    hoverBorder: "hover:border-emerald-500/30",
+  },
+  indigo: {
+    bg: "bg-indigo-500/10",
+    text: "text-indigo-400",
+    border: "border-indigo-500/20",
+    hoverBg: "hover:bg-indigo-500/[0.06]",
+    hoverBorder: "hover:border-indigo-500/30",
+  },
+  slate: {
+    bg: "bg-white/[0.06]",
+    text: "text-slate-300",
+    border: "border-white/[0.08]",
+    hoverBg: "hover:bg-white/[0.08]",
+    hoverBorder: "hover:border-white/[0.15]",
+  },
+  blue: {
+    bg: "bg-blue-500/10",
+    text: "text-blue-400",
+    border: "border-blue-500/20",
+    hoverBg: "hover:bg-blue-500/[0.06]",
+    hoverBorder: "hover:border-blue-500/30",
+  },
+};
+
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
 const Contact = () => {
-  const contactMethods = [
-    {
-      icon: FaWhatsapp,
-      title: "WhatsApp",
-      value: "(62) 99932-8204",
-      href: "https://wa.me/5562999328204"
-    },
-    {
-      icon: FaEnvelope,
-      title: "Email",
-      value: "phthedev@gmail.com",
-      href: "mailto:phthedev@gmail.com"
-    },
-    {
-      icon: FaGithub,
-      title: "GitHub",
-      value: "PhTheDev",
-      href: "https://github.com/PhTheDev"
-    },
-    {
-      icon: FaLinkedin,
-      title: "LinkedIn",
-      value: "Pedro Henrique",
-      href: "https://www.linkedin.com/in/pedro-henrique-faria-6b22932a7/"
-    }
-  ];
-
   return (
-    <section id="contact" className="relative py-24 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-[var(--background)]">
-        <div className="absolute top-40 -left-20 w-72 h-72 bg-[var(--accent)]/20 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-40 -right-20 w-72 h-72 bg-purple-500/20 rounded-full filter blur-3xl"></div>
+    <section id="contact" className="relative py-24 bg-[#0a0a0f] overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-indigo-500/30 to-transparent" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-indigo-600/6 rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative container mx-auto px-4 max-w-6xl">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="mb-16"
         >
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-[var(--accent)] to-purple-500 bg-clip-text text-transparent">
-            Entre em Contato
+          <p className="text-xs font-mono text-indigo-400 tracking-[0.2em] uppercase mb-3">
+            03. Contato
+          </p>
+          <h2 className="text-4xl font-semibold text-white tracking-tight mb-4">
+            Vamos conversar
           </h2>
-          <div className="mt-4 h-1 w-20 bg-gradient-to-r from-[var(--accent)] to-purple-500 mx-auto rounded-full"></div>
-          <p className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto">
-            Estou disponível para novos projetos, colaborações e oportunidades.
-            Vamos transformar suas ideias em realidade?
+          <div className="w-8 h-0.5 bg-indigo-500 rounded-full mb-6" />
+          <p className="text-slate-500 text-[15px] max-w-md leading-relaxed">
+            Estou aberto a novas oportunidades, projetos freelance e colaborações.
+            Pode me chamar por qualquer canal abaixo.
           </p>
         </motion.div>
 
+        {/* Cards */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={container}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
         >
-          {contactMethods.map((method, index) => (
-            <ContactCard
-              key={index}
-              icon={method.icon}
-              title={method.title}
-              value={method.value}
-              href={method.href}
-            />
-          ))}
+          {contactMethods.map((method) => {
+            const c = colorMap[method.color];
+            return (
+              <motion.a
+                key={method.title}
+                variants={item}
+                href={method.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -3 }}
+                className={`group flex flex-col gap-4 p-5 rounded-xl border border-white/[0.06] bg-white/[0.02] ${c.hoverBg} ${c.hoverBorder} transition-all duration-300`}
+              >
+                <div className={`w-10 h-10 rounded-xl ${c.bg} border ${c.border} flex items-center justify-center`}>
+                  <method.icon className={`w-4 h-4 ${c.text}`} />
+                </div>
+                <div>
+                  <p className="text-[11px] text-slate-600 uppercase tracking-widest mb-1">{method.title}</p>
+                  <p className="text-sm text-slate-300 font-medium group-hover:text-white transition-colors">{method.value}</p>
+                </div>
+              </motion.a>
+            );
+          })}
         </motion.div>
 
-        {/* Additional Contact Form or Information */}
+        {/* CTA block */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 p-8 rounded-2xl bg-gray-900/50 border border-gray-800/50 backdrop-blur-sm text-center"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="relative rounded-2xl border border-indigo-500/20 bg-indigo-500/[0.04] p-8 text-center overflow-hidden"
         >
-          <h3 className="text-2xl font-bold text-white mb-4">
-            Vamos Trabalhar Juntos?
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+          </div>
+          <h3 className="text-xl font-semibold text-white mb-2">
+            Pronto para transformar suas ideias em realidade?
           </h3>
-          <p className="text-gray-400">
-            Estou sempre aberto a discutir novos projetos e oportunidades de colaboração.
+          <p className="text-slate-500 text-sm mb-6 max-w-sm mx-auto">
+            Estou sempre disponível para discutir novos projetos e oportunidades.
           </p>
+          <a
+            href="mailto:phthedev@gmail.com"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white text-sm font-medium transition-all duration-200 hover:-translate-y-px"
+          >
+            <FaEnvelope className="w-3.5 h-3.5" />
+            Enviar mensagem
+          </a>
         </motion.div>
       </div>
     </section>

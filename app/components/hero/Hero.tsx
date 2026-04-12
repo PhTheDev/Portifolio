@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const stats = [
-  { value: "1+", label: "Ano de exp." },
-  { value: "3+", label: "Projetos" },
+  { value: "2", label: "Ano de exp." },
+  { value: "5+", label: "Projetos Participados" },
   { value: "10+", label: "Tecnologias" },
 ];
 
@@ -41,7 +41,7 @@ const Hero = () => {
 
       <div className="relative max-w-6xl mx-auto px-6 lg:px-8 w-full">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-          
+
           {/* LEFT */}
           <div className="flex-1 text-center lg:text-left">
             {/* Status */}
@@ -103,10 +103,10 @@ const Hero = () => {
 
           {/* RIGHT */}
           <div className="flex flex-col items-center gap-8">
-            
+
             {/* FOTO PROFISSIONAL */}
             <div className="relative w-[260px] lg:w-[340px] group">
-              
+
               {/* Glow atrás */}
               <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/20 via-violet-500/10 to-transparent blur-3xl opacity-60 scale-110" />
 

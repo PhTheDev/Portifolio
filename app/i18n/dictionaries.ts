@@ -13,7 +13,7 @@ export const pt = {
   about: {
     p1Name: "Pedro Henrique é desenvolvedor Full Stack em Goiânia.",
     p1: " Já projetei, construí e mantive sistemas reais em produção, do banco de dados à interface.",
-    p2: "Boa parte dessa bagagem veio de dois anos de estágio no CRMV-GO, onde aprendi a levar um sistema do levantamento de requisitos até a manutenção. Hoje estudo Engenharia da Computação na PUC-GO e procuro minha próxima oportunidade.",
+    p2: "Boa parte dessa bagagem veio de dois anos de estágio no Conselho Regional de Medicina Veterinária de Goiás (CRMV-GO), onde aprendi a levar um sistema do levantamento de requisitos até a manutenção. Hoje estudo Engenharia da Computação na PUC-GO e procuro minha próxima oportunidade.",
     facts: [
       { label: "Local", value: "Goiânia, GO · remoto ou presencial" },
       { label: "Formação", value: "Engenharia da Computação, PUC-GO, desde 2023" },
@@ -22,7 +22,7 @@ export const pt = {
   },
   work: {
     title: "Trabalho",
-    remark: "Sistemas reais, a maioria construída durante meu estágio no CRMV-GO.",
+    remark: "Sistemas reais, a maioria construída durante meu estágio no Conselho Regional de Medicina Veterinária de Goiás.",
     live: "Ver no ar",
     code: "Código",
     wip: "Em desenvolvimento",
@@ -115,7 +115,7 @@ export const en: Dictionary = {
   about: {
     p1Name: "Pedro Henrique is a Full Stack developer in Goiânia.",
     p1: " I've designed, built and maintained real production systems, from the database to the interface.",
-    p2: "Much of that experience comes from a two-year internship at CRMV-GO, where I learned to take a system from requirements to maintenance. Today I study Computer Engineering at PUC-GO and I'm looking for my next opportunity.",
+    p2: "Much of that experience comes from a two-year internship at the Regional Veterinary Medicine Council of Goiás (CRMV-GO), where I learned to take a system from requirements to maintenance. Today I study Computer Engineering at PUC-GO and I'm looking for my next opportunity.",
     facts: [
       { label: "Place", value: "Goiânia, Brazil · remote or on-site" },
       { label: "Education", value: "Computer Engineering, PUC-GO, since 2023" },
@@ -124,7 +124,7 @@ export const en: Dictionary = {
   },
   work: {
     title: "Work",
-    remark: "Real systems, most of them built during my internship at CRMV-GO.",
+    remark: "Real systems, most of them built during my internship at the Regional Veterinary Medicine Council of Goiás.",
     live: "View live",
     code: "Code",
     wip: "In development",

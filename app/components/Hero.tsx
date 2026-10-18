@@ -70,7 +70,7 @@ export default function Hero() {
 
       {/* Frase e ação na base */}
       <div className="flex flex-wrap items-center justify-between gap-x-12 gap-y-6">
-        <motion.p className="max-w-[44ch] text-[clamp(1.125rem,1.4vw,1.375rem)] leading-relaxed" {...rise(0.3)}>
+        <motion.p className="max-w-[56ch] text-[clamp(1.125rem,1.4vw,1.375rem)] leading-relaxed" {...rise(0.3)}>
           {h.line}
         </motion.p>
         <motion.a href="#work" className="btn" {...rise(0.4)}>

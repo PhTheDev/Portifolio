@@ -30,7 +30,7 @@ export default function About() {
 
         <div className="order-1 lg:order-2 lg:col-span-9 lg:col-start-4">
           <Reveal>
-            <p className="text-[clamp(1.375rem,2.3vw,2.25rem)] leading-[1.2]">
+            <p className="text-[clamp(1.25rem,1.9vw,1.75rem)] leading-[1.3]">
               {/* O retrato abre o parágrafo como uma capitular: três linhas de altura */}
               <span className="float-left mr-4 mt-1 block h-[2.8em] w-[2.8em] md:h-[4.5em] md:w-[4.5em] overflow-hidden bg-accent">
                 <Image

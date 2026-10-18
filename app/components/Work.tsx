@@ -48,7 +48,7 @@ export default function Work() {
                 <div className="order-3 md:order-none md:col-span-4">
                   <p className="text-base">{p.desc}</p>
                   <p className="mt-3 flex items-center gap-2 text-base font-semibold">
-                    {p.role.startsWith("Criado") || p.role.startsWith("Built") ? <Hammer size={16} /> : <Users size={16} />}
+                    {"team" in p && p.team ? <Users size={16} /> : <Hammer size={16} />}
                     {p.role}
                   </p>
                   <ul className="mt-3 flex flex-wrap gap-2" aria-label="Stack">

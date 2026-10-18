@@ -1,7 +1,6 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { dictionaries, Language, Dictionary } from "../i18n/dictionaries";
 
 interface LanguageContextProps {
@@ -35,6 +34,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  useEffect(() => {
+    document.documentElement.lang = language === "pt" ? "pt-BR" : "en";
+  }, [language]);
+
   const dict = dictionaries[language];
 
   return (
@@ -50,34 +53,4 @@ export const useLanguage = () => {
     throw new Error("useLanguage must be used within a LanguageProvider");
   }
   return context;
-};
-
-/**
- * LangTransition — wrap any text/section that should animate on language change.
- * Uses AnimatePresence + framer motion with the current language as the key,
- * so every switch triggers a fade+slide animation.
- */
-export const LangTransition = ({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) => {
-  const { language } = useLanguage();
-
-  return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={language}
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -6 }}
-        transition={{ duration: 0.22, ease: "easeInOut" }}
-        className={className}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
-  );
 };
